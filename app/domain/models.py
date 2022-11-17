@@ -10,18 +10,15 @@ class PlayerAttackDomain:
     is_special_attack: bool
     name_of_attack_or_movement: str
 
-    @property
-    def special_combination(self):
-        return f"{self.movement}{self.hit}"
-
     def has_simple_attack(self):
-        return self.hit and not self.is_special_attack
+        result = self.hit and not self.is_special_attack
+        return bool(result)
 
 
 @dataclass
 class PlayerDomain:
     name: str
-    attacks: List[PlayerAttackDomain] = field(init=False)
+    attacks: List[PlayerAttackDomain] = field(init=False, repr=False)
     energy: int = field(default=6, init=False)
 
     def update_strike(self, attacks):

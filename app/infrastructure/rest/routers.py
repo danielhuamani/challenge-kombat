@@ -8,7 +8,6 @@ router = APIRouter()
 
 @router.post("/play")
 def play(players: PlayersCreateBody):
-    print(players)
     player_1_movements = players.player1.movimientos
     player_1_hits = players.player1.golpes
     player_2_movements = players.player2.movimientos
