@@ -1,10 +1,9 @@
-from domain.models import PlayerDomain, PlayerAttackDomain
-from domain.constants import (
+from app.domain.models import PlayerDomain, PlayerAttackDomain
+from app.domain.constants import (
     PlayerBaseEnergyByAttack,
     MovementsNameEnum,
     HitsNameEnum,
 )
-from functools import reduce
 
 
 class PlayerCreateService:

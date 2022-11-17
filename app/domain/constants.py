@@ -29,10 +29,26 @@ class Player2CombinationNameByAttack(Enum):
 class MovementsNameEnum(Enum):
     W = "salta"
     S = "se agacha"
-    A = "retrocede"
-    D = "avanza"
+    A = "va a la izquierda"
+    D = "va a la derecha"
+
+
+class Player1MovementsNameEnum(Enum):
+    W = "salta"
+    S = "se agacha"
+    D = "va a la derecha"
+
+
+class Player2MovementsNameEnum(Enum):
+    W = "salta"
+    S = "se agacha"
+    A = "va a la izquierda"
 
 
 class HitsNameEnum(Enum):
     P = "le da un puñetazo"
     K = "da una patada"
+
+
+PLAYER_1 = "player1"
+PLAYER_2 = "player2"

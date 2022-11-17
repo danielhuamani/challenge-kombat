@@ -1,11 +1,13 @@
-from domain.models import PlayerDomain, PlayerAttackDomain
-from domain.constants import (
+from app.domain.models import PlayerDomain, PlayerAttackDomain
+from app.domain.constants import (
     Player1CombinationEnergyByAttack,
     Player2CombinationEnergyByAttack,
     Player1CombinationNameByAttack,
     Player2CombinationNameByAttack,
+    PLAYER_1,
+    PLAYER_2,
 )
-from applicant.services.shared import PlayerCreateService
+from app.applicant.services.shared import PlayerCreateService
 from functools import reduce
 
 
@@ -14,7 +16,7 @@ class StartOfFightService:
     def execute(cls, player1, player2):
         num_rounds = cls.get_num_rounds(player1, player2)
         players = [player1, player2]
-        if cls.order_by(player1, player2) == "player2":
+        if cls.order_by(player1, player2) == PLAYER_2:
             players.reverse()
         player_win = None
         messages = []
@@ -79,16 +81,16 @@ class StartOfFightService:
             return result_movements
         elif result_hits is not None:
             return result_hits
-        return "player1"
+        return PLAYER_1
 
     @classmethod
     def order_by_len(cls, player1_len, player2_len):
         if player1_len == player2_len:
             return None
         elif player1_len > player2_len:
-            return "player2"
+            return PLAYER_2
         else:
-            return "player1"
+            return PLAYER_1
 
 
 class Player1CreateService(PlayerCreateService):

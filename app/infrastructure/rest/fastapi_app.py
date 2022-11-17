@@ -1,0 +1,8 @@
+from fastapi.applications import FastAPI
+from .routers import register_routers
+
+
+def init_application():
+    app = FastAPI(title="Kombat")
+    register_routers(app)
+    return app
