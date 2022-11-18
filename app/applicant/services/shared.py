@@ -1,5 +1,8 @@
-from app.domain.constants import (HitsNameEnum, MovementsNameEnum,
-                                  PlayerBaseEnergyByAttack)
+from app.domain.constants import (
+    HitsNameEnum,
+    MovementsNameEnum,
+    PlayerBaseEnergyByAttack,
+)
 from app.domain.models import PlayerAttackDomain, PlayerDomain
 
 
@@ -18,10 +21,18 @@ class PlayerCreateService:
         attacks = []
         for x in range(num_rounds):
             is_special_attack = cls.get_is_special_attack(movements[x], hits[x])
-            attack_or_movement_name = cls.get_name_of_attack_or_movement(p.name, movements[x], hits[x])
+            attack_or_movement_name = cls.get_name_of_attack_or_movement(
+                p.name, movements[x], hits[x]
+            )
             energy_attack = cls.get_energy_by_attack(movements[x], hits[x])
             attacks.append(
-                PlayerAttackDomain(movements[x], hits[x], energy_attack, is_special_attack, attack_or_movement_name)
+                PlayerAttackDomain(
+                    movements[x],
+                    hits[x],
+                    energy_attack,
+                    is_special_attack,
+                    attack_or_movement_name,
+                )
             )
         p.update_strike(attacks)
         return p
@@ -31,7 +42,9 @@ class PlayerCreateService:
         special_combination = f"{movement}{hit}"
         is_special_attack = False
         for strike in cls.enum_special_combination_energy_by_attack:
-            if strike.name in special_combination and len(special_combination) >= len(strike.name):
+            if strike.name in special_combination and len(special_combination) >= len(
+                strike.name
+            ):
                 is_special_attack = True
                 break
         return is_special_attack
@@ -56,7 +69,9 @@ class PlayerCreateService:
     def get_special_attack_name(cls, special_combination):
         name = ""
         for strike in cls.enum_special_attack_name:
-            if strike.name in special_combination and len(special_combination) >= len(strike.name):
+            if strike.name in special_combination and len(special_combination) >= len(
+                strike.name
+            ):
                 name = strike.value
                 break
         return name
@@ -105,7 +120,10 @@ class PlayerCreateService:
 
     @classmethod
     def get_allowed_attack(cls, movement):
-        return bool(movement) and not movement[-1] in cls.enum_movements_allowed.__members__
+        return (
+            bool(movement)
+            and not movement[-1] in cls.enum_movements_allowed.__members__
+        )
 
     @classmethod
     def get_energy_by_attack(cls, movement, hit):

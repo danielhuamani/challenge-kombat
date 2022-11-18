@@ -28,7 +28,11 @@ class PlayerCreateBody(BaseModel):
                     break
             new_values.append(letters.upper())
             if has_error:
-                errors.append(ErrorWrapper(ValueError(f"invalid movement num {index}"), loc="movement"))
+                errors.append(
+                    ErrorWrapper(
+                        ValueError(f"invalid movement num {index}"), loc="movement"
+                    )
+                )
         if errors:
             raise ValidationError(errors, cls)
         return new_values

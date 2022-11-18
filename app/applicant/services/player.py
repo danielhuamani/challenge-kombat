@@ -1,13 +1,16 @@
 from functools import reduce
 
 from app.applicant.services.shared import PlayerCreateService
-from app.domain.constants import (PLAYER_1, PLAYER_2,
-                                  Player1CombinationEnergyByAttack,
-                                  Player1CombinationNameByAttack,
-                                  Player1MovementsNameEnum,
-                                  Player2CombinationEnergyByAttack,
-                                  Player2CombinationNameByAttack,
-                                  Player2MovementsNameEnum)
+from app.domain.constants import (
+    PLAYER_1,
+    PLAYER_2,
+    Player1CombinationEnergyByAttack,
+    Player1CombinationNameByAttack,
+    Player1MovementsNameEnum,
+    Player2CombinationEnergyByAttack,
+    Player2CombinationNameByAttack,
+    Player2MovementsNameEnum,
+)
 from app.domain.models import PlayerAttackDomain, PlayerDomain
 
 
@@ -24,14 +27,18 @@ class StartOfFightService:
             player_first = players[0]
             player_second = players[1]
             if player_first.round_max() > x:
-                player_first_message = cls.send_message_by_attack(player_first, player_second, x)
+                player_first_message = cls.send_message_by_attack(
+                    player_first, player_second, x
+                )
                 messages.append(player_first_message)
                 cls.reduce_energy(player_second, player_first.attacks[x].energy_attack)
                 if not cls.is_valid_energy(player_second):
                     player_win = player_first
                     break
             if player_second.round_max() > x:
-                player_second_message = cls.send_message_by_attack(player_second, player_first, x)
+                player_second_message = cls.send_message_by_attack(
+                    player_second, player_first, x
+                )
                 cls.reduce_energy(player_first, player_second.attacks[x].energy_attack)
                 messages.append(player_second_message)
                 if not cls.is_valid_energy(player_first):
@@ -53,7 +60,9 @@ class StartOfFightService:
     def send_message_by_attack(cls, player_attack, player_defend, num_round):
         attack = player_attack.attacks[num_round]
         if attack.has_simple_attack() and attack.energy_attack:
-            message = f"{attack.name_of_attack_or_movement} al pobre {player_defend.name}"
+            message = (
+                f"{attack.name_of_attack_or_movement} al pobre {player_defend.name}"
+            )
         elif attack.has_simple_attack() and not attack.energy_attack:
             message = attack.name_of_attack_or_movement
             return message
@@ -75,7 +84,9 @@ class StartOfFightService:
         p1_len_hits = reduce(lambda x, y: x + len(y.hit), player1.attacks, 0)
         p2_len_movements = reduce(lambda x, y: x + len(y.movement), player2.attacks, 0)
         p2_len_hits = reduce(lambda x, y: x + len(y.hit), player2.attacks, 0)
-        result_buttons = cls.order_by_len(p1_len_movements + p1_len_hits, p2_len_movements + p2_len_hits)
+        result_buttons = cls.order_by_len(
+            p1_len_movements + p1_len_hits, p2_len_movements + p2_len_hits
+        )
         result_movements = cls.order_by_len(p1_len_movements, p2_len_movements)
         result_hits = cls.order_by_len(p1_len_hits, p2_len_hits)
         if result_buttons is not None:
