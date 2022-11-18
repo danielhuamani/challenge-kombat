@@ -1,6 +1,7 @@
 FROM python:3.9.7
 
 RUN apt-get -y update
+RUN pip install --upgrade pip
 RUN mkdir /www
 WORKDIR /www
 COPY ./entrypoint.sh /entrypoint.sh
