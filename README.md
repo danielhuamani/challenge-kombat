@@ -12,6 +12,11 @@ make build
 make up
 ```
 
+### Open browser and send data by POST
+```
+http://localhost:8000/play
+```
+
 
 ## Project Run Unit Test
 
@@ -19,5 +24,3 @@ make up
 ```
 make run-test
 ```
-
-
