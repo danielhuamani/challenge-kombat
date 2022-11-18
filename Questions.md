@@ -18,7 +18,7 @@ De ser posible, que quede solo un commit con los cambios.
 
 3.¿Cuál ha sido la situación más compleja que has tenido con esto? 
 
-  un cambio en la logica de negocio, como consecuencia trajo cambio en las tablas y estructura de codigo, asi que se tuvo que hacer migraciones de data.
+  un cambio en la logica de negocio, como consecuencia trajo cambio en las tablas y estructura de codigo, asi que se tuvo que hacer migraciones de data y versionamiento de api.
 
 
 4. ¿Qué experiencia has tenido con los microservicios? 
