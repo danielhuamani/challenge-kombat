@@ -24,3 +24,5 @@ http://localhost:8000/play
 ```
 make run-test
 ```
+
+## Questions [link](https://github.com/danielhuamani/challenge-kombat/blob/main/Questions.md)
