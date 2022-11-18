@@ -1,4 +1,5 @@
 from fastapi.applications import FastAPI
+
 from .routers import register_routers
 
 

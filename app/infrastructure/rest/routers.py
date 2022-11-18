@@ -1,7 +1,10 @@
-from fastapi.routing import APIRouter
 from fastapi import FastAPI
+from fastapi.routing import APIRouter
+
+from app.applicant.services.player import (Player1CreateService,
+                                           Player2CreateService,
+                                           StartOfFightService)
 from app.domain.schemas import PlayersCreateBody
-from app.applicant.services.player import Player1CreateService, Player2CreateService, StartOfFightService
 
 router = APIRouter()
 

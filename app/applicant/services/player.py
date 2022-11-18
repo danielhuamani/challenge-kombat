@@ -1,14 +1,14 @@
-from app.domain.models import PlayerDomain, PlayerAttackDomain
-from app.domain.constants import (
-    Player1CombinationEnergyByAttack,
-    Player2CombinationEnergyByAttack,
-    Player1CombinationNameByAttack,
-    Player2CombinationNameByAttack,
-    PLAYER_1,
-    PLAYER_2,
-)
-from app.applicant.services.shared import PlayerCreateService
 from functools import reduce
+
+from app.applicant.services.shared import PlayerCreateService
+from app.domain.constants import (PLAYER_1, PLAYER_2,
+                                  Player1CombinationEnergyByAttack,
+                                  Player1CombinationNameByAttack,
+                                  Player1MovementsNameEnum,
+                                  Player2CombinationEnergyByAttack,
+                                  Player2CombinationNameByAttack,
+                                  Player2MovementsNameEnum)
+from app.domain.models import PlayerAttackDomain, PlayerDomain
 
 
 class StartOfFightService:
@@ -52,8 +52,11 @@ class StartOfFightService:
     @classmethod
     def send_message_by_attack(cls, player_attack, player_defend, num_round):
         attack = player_attack.attacks[num_round]
-        if attack.has_simple_attack():
+        if attack.has_simple_attack() and attack.energy_attack:
             message = f"{attack.name_of_attack_or_movement} al pobre {player_defend.name}"
+        elif attack.has_simple_attack() and not attack.energy_attack:
+            message = attack.name_of_attack_or_movement
+            return message
         else:
             message = f"{attack.name_of_attack_or_movement}"
         return message
@@ -96,8 +99,10 @@ class StartOfFightService:
 class Player1CreateService(PlayerCreateService):
     enum_special_combination_energy_by_attack = Player1CombinationEnergyByAttack
     enum_special_attack_name = Player1CombinationNameByAttack
+    enum_movements_allowed = Player1MovementsNameEnum
 
 
 class Player2CreateService(PlayerCreateService):
     enum_special_combination_energy_by_attack = Player2CombinationEnergyByAttack
     enum_special_attack_name = Player2CombinationNameByAttack
+    enum_movements_allowed = Player2MovementsNameEnum
