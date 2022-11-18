@@ -20,6 +20,11 @@ http://localhost:8000/play
 
 ## Project Run Unit Test
 
+### Build Test
+```
+make build-test
+```
+
 ### Run Test
 ```
 make run-test
